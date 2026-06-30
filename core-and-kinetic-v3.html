@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Core & Kinetic | Power · Mobility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0B1629; --navy2:#13213A; --navy3:#1A2E50;
+  --gold:#F5C100; --orange:#E86A17; --white:#FFFFFF; --gray:#8A9BB5; --light:#C8D6EC;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:68px;background:rgba(11,22,41,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(245,193,0,0.12);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-text{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.04em;color:var(--white);line-height:1.1;}
+.nav-logo-text span{color:var(--orange);}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{font-size:0.83rem;font-weight:500;color:var(--light);text-decoration:none;letter-spacing:0.03em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--navy);font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:0.92rem;letter-spacing:0.06em;padding:9px 20px;border:none;border-radius:4px;cursor:pointer;text-decoration:none;transition:background 0.2s,transform 0.15s;}
+.nav-cta:hover{background:#ffd21a;transform:translateY(-1px);}
+
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 5vw 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 60% at 80% 40%,rgba(232,106,23,0.13) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 20% 70%,rgba(245,193,0,0.08) 0%,transparent 60%),linear-gradient(160deg,#0B1629 0%,#13213A 100%);}
+.sun-rays{position:absolute;top:8%;right:-4%;width:560px;height:560px;z-index:0;opacity:0.15;border-radius:50%;
+background:conic-gradient(from 0deg,transparent 0deg,var(--gold) 2deg,transparent 18deg,var(--orange) 20deg,transparent 36deg,transparent 36deg,var(--gold) 38deg,transparent 54deg,transparent 72deg,var(--gold) 74deg,transparent 90deg,transparent 90deg,var(--orange) 92deg,transparent 108deg,transparent 126deg,var(--gold) 128deg,transparent 144deg,transparent 144deg,var(--orange) 146deg,transparent 162deg,transparent 162deg,var(--gold) 164deg,transparent 180deg,transparent 180deg,var(--orange) 182deg,transparent 198deg,transparent 216deg,var(--gold) 218deg,transparent 234deg,transparent 252deg,var(--orange) 254deg,transparent 270deg,transparent 270deg,var(--gold) 272deg,transparent 288deg,transparent 288deg,var(--orange) 290deg,transparent 306deg,transparent 324deg,var(--gold) 326deg,transparent 342deg,transparent 342deg,var(--orange) 344deg,transparent 360deg);
+animation:spinRays 40s linear infinite;}
+@keyframes spinRays{to{transform:rotate(360deg);}}
+.hero-content{position:relative;z-index:1;max-width:680px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:1.2rem;}
+.hero-eyebrow::before{content:"";display:inline-block;width:28px;height:2px;background:var(--orange);}
+.hero-h1{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:clamp(3.2rem,8vw,6.5rem);line-height:0.92;letter-spacing:-0.01em;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero-h1 .gold{color:var(--gold);} .hero-h1 .orange{color:var(--orange);}
+.hero-sub{font-size:1.05rem;line-height:1.65;color:var(--light);max-width:520px;margin-bottom:2.5rem;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:var(--navy);font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:0.07em;padding:14px 32px;border:none;border-radius:4px;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.2s,transform 0.15s;}
+.btn-primary:hover{background:#ffd21a;transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--white);font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.07em;padding:14px 32px;border:2px solid rgba(255,255,255,0.3);border-radius:4px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color 0.2s,color 0.2s;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+.stats-bar{background:var(--navy3);border-top:1px solid rgba(245,193,0,0.18);border-bottom:1px solid rgba(245,193,0,0.1);padding:2rem 5vw;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.stat-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0.5rem;border-right:1px solid rgba(255,255,255,0.08);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:2.3rem;color:var(--gold);line-height:1;}
+.stat-label{font-size:0.76rem;font-weight:500;color:var(--gray);letter-spacing:0.06em;text-transform:uppercase;margin-top:4px;}
+
+section{padding:90px 5vw;}
+.section-eyebrow{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);margin-bottom:0.7rem;}
+.section-title{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;line-height:1.05;letter-spacing:0.01em;margin-bottom:1rem;}
+.section-title .accent{color:var(--gold);}
+.section-desc{font-size:1rem;color:var(--light);line-height:1.65;max-width:620px;}
+
+/* PACKAGES */
+#packages{background:var(--navy);}
+.packages-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem;margin-top:3rem;}
+.pkg-card{background:var(--navy2);border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:border-color 0.3s,transform 0.25s;position:relative;}
+.pkg-card:hover{border-color:rgba(245,193,0,0.45);transform:translateY(-4px);}
+.pkg-card.popular{border-color:var(--gold);}
+.popular-badge{position:absolute;top:0;right:0;background:var(--gold);color:var(--navy);font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-bottom-left-radius:6px;}
+.pkg-top{padding:1.6rem 1.5rem 1.1rem;border-bottom:1px solid rgba(255,255,255,0.07);}
+.pkg-kw{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:0.95rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:0.3rem;}
+.pkg-name{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.4rem;text-transform:uppercase;line-height:1.1;margin-bottom:0.4rem;}
+.pkg-tag{font-size:0.8rem;color:var(--gray);line-height:1.4;}
+.pkg-body{padding:1.3rem 1.5rem;flex:1;}
+.components-label{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.pkg-specs{list-style:none;margin-bottom:1.1rem;}
+.pkg-specs li{font-size:0.84rem;color:var(--light);padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;gap:6px;}
+.pkg-specs li:last-child{border-bottom:none;}
+.pkg-specs li .spec-name{color:var(--gray);}
+.pkg-specs li .spec-val{font-weight:600;text-align:right;}
+.battery-note{font-size:0.72rem;color:var(--gray);line-height:1.5;margin-bottom:1.1rem;padding:8px 10px;background:rgba(245,193,0,0.06);border-left:2px solid var(--gold);border-radius:3px;}
+.pkg-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2rem;}
+.feat-chip{font-size:0.68rem;font-weight:600;letter-spacing:0.03em;color:var(--light);background:rgba(255,255,255,0.06);padding:4px 9px;border-radius:20px;}
+.pkg-cta{display:block;text-align:center;padding:11px;background:transparent;border:1.5px solid rgba(245,193,0,0.35);border-radius:5px;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:0.88rem;letter-spacing:0.06em;color:var(--gold);text-decoration:none;transition:background 0.2s,color 0.2s;}
+.pkg-cta:hover,.pkg-card.popular .pkg-cta{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.pkg-disclaimer{margin-top:2.2rem;font-size:0.8rem;color:var(--gray);text-align:center;line-height:1.6;max-width:680px;margin-left:auto;margin-right:auto;}
+
+/* SAVINGS CALCULATOR */
+#calculator{background:var(--navy2);}
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:3rem;}
+.calc-input-group{margin-bottom:1.5rem;}
+.calc-input-group label{display:block;font-size:0.83rem;font-weight:600;color:var(--gray);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;}
+.calc-input{width:100%;background:var(--navy3);border:1px solid rgba(245,193,0,0.2);border-radius:6px;padding:12px 16px;font-size:1.1rem;font-weight:600;color:var(--white);outline:none;transition:border-color 0.2s;font-family:"Inter",sans-serif;}
+.calc-input:focus{border-color:var(--gold);}
+.calc-slider{width:100%;accent-color:var(--gold);height:4px;margin-top:4px;}
+.calc-result{background:var(--navy3);border:1px solid rgba(245,193,0,0.25);border-radius:10px;padding:2rem;}
+.calc-result-row{display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.calc-result-row:last-child{border-bottom:none;}
+.calc-result-label{font-size:0.85rem;color:var(--gray);}
+.calc-result-val{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.25rem;color:var(--gold);}
+.calc-result-val.green{color:#4ade80;}
+.calc-note{font-size:0.74rem;color:var(--gray);margin-top:1rem;line-height:1.5;}
+
+/* WARRANTY STRIP */
+.warranty-strip{background:linear-gradient(135deg,var(--navy3) 0%,#1f3560 100%);border-top:1px solid rgba(245,193,0,0.2);border-bottom:1px solid rgba(245,193,0,0.2);padding:2rem 5vw;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:3rem;text-align:center;}
+.warranty-item{display:flex;align-items:center;gap:12px;}
+.warranty-num{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:2.2rem;color:var(--gold);line-height:1;}
+.warranty-text strong{display:block;font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+.warranty-text span{font-size:0.75rem;color:var(--gray);}
+
+/* FEATURES */
+#features{background:var(--navy);}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}
+.feat-card{padding:2rem 1.6rem;border:1px solid rgba(255,255,255,0.07);border-radius:10px;background:var(--navy2);transition:border-color 0.25s,transform 0.25s;}
+.feat-card:hover{border-color:rgba(245,193,0,0.35);transform:translateY(-3px);}
+.feat-icon{width:48px;height:48px;background:rgba(245,193,0,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;font-size:1.5rem;}
+.feat-card-title{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.1rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;}
+.feat-card-desc{font-size:0.85rem;color:var(--gray);line-height:1.6;}
+
+/* HOW IT WORKS */
+#how{background:var(--navy2);}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3rem;position:relative;}
+.steps-grid::before{content:"";position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,var(--gold),var(--orange),var(--gold));opacity:0.25;z-index:0;}
+.step{padding:0 1.5rem;position:relative;z-index:1;text-align:center;}
+.step-num{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);background:var(--navy2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:1.4rem;color:var(--gold);}
+.step-title{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.05rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.6rem;}
+.step-desc{font-size:0.85rem;color:var(--gray);line-height:1.65;}
+
+/* GALLERY */
+#gallery{background:var(--navy);}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:220px;gap:0.9rem;margin-top:3rem;}
+.gallery-item{position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);cursor:pointer;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-item.tall{grid-row:span 2;}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:14px 16px 12px;background:linear-gradient(to top,rgba(11,22,41,0.92),transparent);font-size:0.78rem;font-weight:600;color:var(--white);letter-spacing:0.02em;}
+.gallery-location{display:inline-block;background:var(--gold);color:var(--navy);font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:1.5rem;}
+
+/* FAQ */
+#faq{background:var(--navy2);}
+.faq-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:0.6rem;max-width:780px;}
+.faq-item{background:var(--navy3);border:1px solid rgba(255,255,255,0.08);border-radius:8px;overflow:hidden;}
+.faq-q{width:100%;text-align:left;padding:1.1rem 1.5rem;background:none;border:none;color:var(--white);font-family:"Inter",sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+.faq-q:hover{color:var(--gold);}
+.faq-arrow{font-size:1.1rem;color:var(--gold);transition:transform 0.25s;flex-shrink:0;}
+.faq-item.open .faq-arrow{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.25s;padding:0 1.5rem;font-size:0.87rem;color:var(--gray);line-height:1.7;}
+.faq-item.open .faq-a{max-height:220px;padding:0 1.5rem 1.2rem;}
+
+/* CTA */
+#cta{background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(232,106,23,0.15) 0%,transparent 70%),var(--navy2);text-align:center;padding:100px 5vw;}
+.cta-inner{max-width:680px;margin:0 auto;}
+.contact-options{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;text-align:left;}
+.contact-card{background:var(--navy3);border:1px solid rgba(245,193,0,0.22);border-radius:12px;padding:1.8rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;}
+.contact-card h4{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.1rem;text-transform:uppercase;letter-spacing:0.04em;}
+.viber-qr{width:150px;height:150px;border-radius:10px;border:3px solid rgba(245,193,0,0.3);object-fit:cover;}
+.contact-card p{font-size:0.82rem;color:var(--light);line-height:1.55;}
+.btn-viber{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;background:#7360F2;color:#fff;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:0.92rem;letter-spacing:0.05em;border:none;border-radius:5px;cursor:pointer;text-decoration:none;width:100%;transition:background 0.2s;}
+.btn-viber:hover{background:#5d4cd6;}
+.btn-fb{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;background:#1877F2;color:#fff;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:0.92rem;letter-spacing:0.05em;border:none;border-radius:5px;cursor:pointer;text-decoration:none;width:100%;transition:background 0.2s;}
+.btn-fb:hover{background:#1461c9;}
+.btn-email{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;background:transparent;color:var(--light);font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:0.92rem;letter-spacing:0.05em;border:1.5px solid rgba(255,255,255,0.2);border-radius:5px;text-decoration:none;width:100%;transition:border-color 0.2s,color 0.2s;}
+.btn-email:hover{border-color:var(--white);color:var(--white);}
+.contact-note{font-size:0.8rem;color:var(--gray);margin-top:2rem;line-height:1.6;}
+
+/* FOOTER */
+footer{background:#070F1D;padding:3rem 5vw 2rem;border-top:1px solid rgba(255,255,255,0.07);}
+.footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;}
+.footer-tagline{font-size:0.82rem;color:var(--gray);margin-top:0.5rem;max-width:220px;line-height:1.5;}
+.footer-col h4{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:0.5rem;}
+.footer-col a{font-size:0.84rem;color:var(--gray);text-decoration:none;transition:color 0.2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;}
+.footer-copy{font-size:0.78rem;color:var(--gray);}
+.footer-note{font-size:0.78rem;color:rgba(138,155,181,0.5);}
+
+.float-viber{position:fixed;bottom:28px;right:28px;z-index:90;width:58px;height:58px;background:#7360F2;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:transform 0.2s,background 0.2s;}
+.float-viber:hover{transform:scale(1.1);background:#5d4cd6;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+@media (max-width:1000px){
+  .packages-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:900px){
+  .nav-links{display:none;}
+  .features-grid{grid-template-columns:repeat(2,1fr);}
+  .steps-grid{grid-template-columns:repeat(2,1fr);gap:2rem;}
+  .steps-grid::before{display:none;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+  .stat-item:nth-child(2){border-right:none;}
+  .calc-wrap{grid-template-columns:1fr;}
+  .contact-options{grid-template-columns:1fr;}
+}
+@media (max-width:600px){
+  .packages-grid,.features-grid,.steps-grid,.gallery-grid{grid-template-columns:1fr;}
+  .gallery-item.tall{grid-row:span 1;}
+  section{padding:70px 5vw;}
+}
+</style>
+</head>
+<body>
+
+<script>
+  // ★ SITE CONFIG — edit here to update contact info everywhere ★
+  const CONFIG = {
+    phone:    "09087870259",
+    viber:    "viber://chat?number=+639087870259",
+    facebook: "https://www.facebook.com/CoreandKinetic",
+    email:    "info@coreandkinetic.ph",
+    meralcoRate: 12
+  };
+</script>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" stroke="#3D3D3D" stroke-width="2"/>
+      <path d="M18 5 A13 13 0 1 0 18 31" stroke="#555" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M17 12 L23 18 L17 24" stroke="#E86A17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="24" cy="10" r="2.5" fill="#F5C100" opacity="0.75"/>
+    </svg>
+    <div class="nav-logo-text">CORE &amp; <span>KINETIC</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#calculator">Savings</a></li>
+    <li><a href="#gallery">Our Work</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">FREE ROI ANALYSIS</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="sun-rays"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Solar · Storage · Safety</div>
+    <h1 class="hero-h1">Your Own<br><span class="gold">Power</span><br><span class="orange">Plant.</span></h1>
+    <p class="hero-sub">High-output inverters. Expandable LiFePO4 battery storage. Professional installation. Real energy control for Philippine homes.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">FREE ROI ANALYSIS</a>
+      <a href="#packages" class="btn-ghost">VIEW PACKAGES</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">Year Replacement Warranty</div></div>
+  <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">System Monitoring</div></div>
+  <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Package Sizes</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Safety First Policy</div></div>
+</div>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="reveal">
+    <p class="section-eyebrow">System Packages</p>
+    <h2 class="section-title">What Gets <span class="accent">Installed</span></h2>
+    <p class="section-desc">Every package is built around your actual consumption. Here's exactly what components go into each system — request a personalized quote for pricing based on your site assessment.</p>
+  </div>
+
+  <div class="packages-grid reveal">
+
+    <div class="pkg-card popular">
+      <div class="popular-badge">Most Popular</div>
+      <div class="pkg-top">
+        <p class="pkg-kw">6kW System</p>
+        <h3 class="pkg-name">Essential Home</h3>
+        <p class="pkg-tag">Ideal for average households running 2–3 air conditioning units.</p>
+      </div>
+      <div class="pkg-body">
+        <p class="components-label">What's Installed</p>
+        <ul class="pkg-specs">
+          <li><span class="spec-name">Inverter</span><span class="spec-val">6kW</span></li>
+          <li><span class="spec-name">Solar Panels</span><span class="spec-val">10 × 600W</span></li>
+          <li><span class="spec-name">Battery Storage</span><span class="spec-val">1 × 16kWh (51V/314Ah)</span></li>
+          <li><span class="spec-name">Est. Roof Area</span><span class="spec-val">~23 sqm</span></li>
+        </ul>
+        <p class="battery-note">🔋 Need longer backup? Additional 16kWh battery units can be added on request.</p>
+        <div class="pkg-features"><span class="feat-chip">24/7 Monitoring</span><span class="feat-chip">LiFePO4 Safety</span><span class="feat-chip">10-Yr Warranty</span></div>
+        <a href="#cta" class="pkg-cta">GET A CUSTOM QUOTE</a>
+      </div>
+    </div>
+
+    <div class="pkg-card">
+      <div class="pkg-top">
+        <p class="pkg-kw">8kW System</p>
+        <h3 class="pkg-name">Heavy-Duty</h3>
+        <p class="pkg-tag">Medium-to-large homes with multiple appliances running daily.</p>
+      </div>
+      <div class="pkg-body">
+        <p class="components-label">What's Installed</p>
+        <ul class="pkg-specs">
+          <li><span class="spec-name">Inverter</span><span class="spec-val">8kW</span></li>
+          <li><span class="spec-name">Solar Panels</span><span class="spec-val">14 × 600W</span></li>
+          <li><span class="spec-name">Battery Storage</span><span class="spec-val">1 × 16kWh (51V/314Ah)</span></li>
+          <li><span class="spec-name">Est. Roof Area</span><span class="spec-val">~32 sqm</span></li>
+        </ul>
+        <p class="battery-note">🔋 Need longer backup? Additional 16kWh battery units can be added on request.</p>
+        <div class="pkg-features"><span class="feat-chip">24/7 Monitoring</span><span class="feat-chip">LiFePO4 Safety</span><span class="feat-chip">10-Yr Warranty</span></div>
+        <a href="#cta" class="pkg-cta">GET A CUSTOM QUOTE</a>
+      </div>
+    </div>
+
+    <div class="pkg-card">
+      <div class="pkg-top">
+        <p class="pkg-kw">10kW System</p>
+        <h3 class="pkg-name">Enterprise Power</h3>
+        <p class="pkg-tag">Large homes or small businesses with heavy daytime load.</p>
+      </div>
+      <div class="pkg-body">
+        <p class="components-label">What's Installed</p>
+        <ul class="pkg-specs">
+          <li><span class="spec-name">Inverter</span><span class="spec-val">10kW</span></li>
+          <li><span class="spec-name">Solar Panels</span><span class="spec-val">17 × 600W</span></li>
+          <li><span class="spec-name">Battery Storage</span><span class="spec-val">2 × 16kWh (32kWh total)</span></li>
+          <li><span class="spec-name">Est. Roof Area</span><span class="spec-val">~39 sqm</span></li>
+        </ul>
+        <p class="battery-note">🔋 Need longer backup? Additional 16kWh battery units can be added on request.</p>
+        <div class="pkg-features"><span class="feat-chip">24/7 Monitoring</span><span class="feat-chip">LiFePO4 Safety</span><span class="feat-chip">10-Yr Warranty</span></div>
+        <a href="#cta" class="pkg-cta">GET A CUSTOM QUOTE</a>
+      </div>
+    </div>
+
+    <div class="pkg-card">
+      <div class="pkg-top">
+        <p class="pkg-kw">12kW System</p>
+        <h3 class="pkg-name">Industrial Power</h3>
+        <p class="pkg-tag">Maximum capacity for large properties or commercial use.</p>
+      </div>
+      <div class="pkg-body">
+        <p class="components-label">What's Installed</p>
+        <ul class="pkg-specs">
+          <li><span class="spec-name">Inverter</span><span class="spec-val">12kW</span></li>
+          <li><span class="spec-name">Solar Panels</span><span class="spec-val">20 × 600W</span></li>
+          <li><span class="spec-name">Battery Storage</span><span class="spec-val">2 × 16kWh (32kWh total)</span></li>
+          <li><span class="spec-name">Est. Roof Area</span><span class="spec-val">~46 sqm</span></li>
+        </ul>
+        <p class="battery-note">🔋 Need longer backup? Additional 16kWh battery units can be added on request.</p>
+        <div class="pkg-features"><span class="feat-chip">24/7 Monitoring</span><span class="feat-chip">LiFePO4 Safety</span><span class="feat-chip">10-Yr Warranty</span></div>
+        <a href="#cta" class="pkg-cta">GET A CUSTOM QUOTE</a>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="pkg-disclaimer">Every package includes mounting structure, complete wiring &amp; cabling, breakers &amp; surge protection, 24/7 monitoring app access, and professional installation. <strong>Actual system cost depends on site assessment, roof condition, and location.</strong> Request a personalized quote — prices are subject to change without prior notice.</p>
+</section>
+
+<!-- WARRANTY STRIP -->
+<div class="warranty-strip reveal">
+  <div class="warranty-item"><div class="warranty-num">10</div><div class="warranty-text"><strong>Year Warranty</strong><span>Replacement guarantee</span></div></div>
+  <div class="warranty-item"><div class="warranty-num">1–3</div><div class="warranty-text"><strong>Day Installation</strong><span>Certified team on-site</span></div></div>
+  <div class="warranty-item"><div class="warranty-num">+16</div><div class="warranty-text"><strong>kWh Expandable</strong><span>Add battery units anytime</span></div></div>
+  <div class="warranty-item"><div class="warranty-num">∞</div><div class="warranty-text"><strong>After-Sales Support</strong><span>We don't disappear after install</span></div></div>
+</div>
+
+<!-- SAVINGS CALCULATOR -->
+<section id="calculator">
+  <div class="reveal">
+    <p class="section-eyebrow">Estimate Your Savings</p>
+    <h2 class="section-title">How Much Will You <span class="accent">Save?</span></h2>
+    <p class="section-desc">Enter your average monthly Meralco bill to see your estimated solar savings. Send us the actual bill for a precise ROI analysis.</p>
+  </div>
+  <div class="calc-wrap reveal">
+    <div>
+      <div class="calc-input-group">
+        <label>Monthly Meralco Bill (₱)</label>
+        <input type="number" id="billInput" class="calc-input" value="8000" min="1000" max="100000"/>
+      </div>
+      <div class="calc-input-group">
+        <label>Adjust Bill Amount</label>
+        <input type="range" id="billSlider" class="calc-slider" min="1000" max="50000" step="500" value="8000"/>
+      </div>
+      <div class="calc-input-group">
+        <label>Recommended Package</label>
+        <div id="recPackage" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;color:var(--gold);margin-top:4px;">6kW Essential Home</div>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-row"><span class="calc-result-label">Monthly Bill</span><span class="calc-result-val" id="rBill">₱8,000</span></div>
+      <div class="calc-result-row"><span class="calc-result-label">Estimated Solar Savings</span><span class="calc-result-val green" id="rSavings">₱5,600 / mo</span></div>
+      <div class="calc-result-row"><span class="calc-result-label">New Monthly Cost</span><span class="calc-result-val" id="rNew">₱2,400</span></div>
+      <div class="calc-result-row"><span class="calc-result-label">Annual Savings</span><span class="calc-result-val green" id="rAnnual">₱67,200 / yr</span></div>
+      <p class="calc-note">⚡ Estimates assume ~70% solar offset based on average Philippine sun hours. Send your actual Meralco bill for a precise calculation — final pricing depends on site assessment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="reveal">
+    <p class="section-eyebrow">Why Core &amp; Kinetic</p>
+    <h2 class="section-title">Built on <span class="accent">Safety &amp; Science</span></h2>
+  </div>
+  <div class="features-grid reveal">
+    <div class="feat-card"><div class="feat-icon">🛡️</div><h3 class="feat-card-title">Safety First</h3><p class="feat-card-desc">Every installation follows strict electrical safety protocols. No shortcuts. Your family's protection is non-negotiable.</p></div>
+    <div class="feat-card"><div class="feat-icon">🔋</div><h3 class="feat-card-title">LiFePO4 Chemistry</h3><p class="feat-card-desc">We only specify Lithium Iron Phosphate batteries — the safest, most stable chemistry available. No thermal runaway risk.</p></div>
+    <div class="feat-card"><div class="feat-icon">📡</div><h3 class="feat-card-title">24/7 Monitoring</h3><p class="feat-card-desc">Real-time system monitoring via mobile app. Know exactly how much power you're generating and storing.</p></div>
+    <div class="feat-card"><div class="feat-icon">⚡</div><h3 class="feat-card-title">Expandable Storage</h3><p class="feat-card-desc">Start with what you need today. Add 16kWh battery units anytime as your power needs grow.</p></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="reveal" style="text-align:center;">
+    <p class="section-eyebrow">The Process</p>
+    <h2 class="section-title">Simple. <span class="accent">Transparent.</span> Done.</h2>
+  </div>
+  <div class="steps-grid reveal">
+    <div class="step"><div class="step-num">1</div><h3 class="step-title">Send Your Meralco Bill</h3><p class="step-desc">Share your latest bill via Viber or Facebook. We use your actual consumption to size the right system — no guessing.</p></div>
+    <div class="step"><div class="step-num">2</div><h3 class="step-title">Free ROI Analysis</h3><p class="step-desc">We compute your payback period, monthly savings, and GSIS loan eligibility. You see the full picture before deciding.</p></div>
+    <div class="step"><div class="step-num">3</div><h3 class="step-title">Site Assessment</h3><p class="step-desc">Our team visits to inspect your roof, wiring, and metering. Final pricing is based on actual site conditions.</p></div>
+    <div class="step"><div class="step-num">4</div><h3 class="step-title">Install &amp; Power On</h3><p class="step-desc">Certified installers complete the job in 1–3 days. Watch your Meralco bill drop from the very next billing cycle.</p></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="reveal">
+    <span class="gallery-location">📍 Biñan, Laguna</span>
+    <p class="section-eyebrow">Our Work</p>
+    <h2 class="section-title">First <span class="accent">Installation</span></h2>
+    <p class="section-desc">A look at our first completed residential rooftop installation — from prep work to final array.</p>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item tall">
+      <img src="images/install-1.jpg" alt="Rooftop solar panel array, Biñan, Laguna"/>
+      <div class="gallery-caption">Rooftop array — full street-facing view</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/install-3.jpg" alt="Scaffolding setup for solar installation"/>
+      <div class="gallery-caption">Site prep &amp; scaffolding setup</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/install-4.jpg" alt="Technician mounting solar panel"/>
+      <div class="gallery-caption">Professional panel mounting</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/install-2.jpg" alt="Solar panels installed on metal roofing"/>
+      <div class="gallery-caption">Panel array on metal roofing</div>
+    </div>
+    <div class="gallery-item tall">
+      <img src="images/install-5.jpg" alt="Close-up of finished solar panel array"/>
+      <div class="gallery-caption">Finished array — close-up detail</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="reveal">
+    <p class="section-eyebrow">Common Questions</p>
+    <h2 class="section-title">Got <span class="accent">Questions?</span></h2>
+  </div>
+  <div class="faq-list reveal" id="faqList">
+    <div class="faq-item"><button class="faq-q">Is solar worth it in the Philippines? <span class="faq-arrow">+</span></button><div class="faq-a">Yes — the Philippines has among the highest electricity rates in Southeast Asia and over 5 peak sun hours daily. Most homeowners recover their investment within a few years and then enjoy 15+ years of significantly reduced electricity costs.</div></div>
+    <div class="faq-item"><button class="faq-q">Can I apply for a GSIS Solar Loan? <span class="faq-arrow">+</span></button><div class="faq-a">Yes. GSIS active members can borrow up to ₱500,000 at 5% interest for an approved solar installation. We assist with preparing the required documentation for GSIS submission.</div></div>
+    <div class="faq-item"><button class="faq-q">Why does pricing vary between customers? <span class="faq-arrow">+</span></button><div class="faq-a">Final system cost depends on your specific site conditions — roof type, structure height, distance from the electrical panel, accessibility, and local labor/material costs in your area. We provide an accurate quote only after a proper site assessment.</div></div>
+    <div class="faq-item"><button class="faq-q">Can I add more battery storage later? <span class="faq-arrow">+</span></button><div class="faq-a">Yes. Our battery units are modular — each is a 16kWh (51V/314Ah) LiFePO4 unit. You can start with one and add more units later as your backup or storage needs grow.</div></div>
+    <div class="faq-item"><button class="faq-q">What happens during a power outage (brownout)? <span class="faq-arrow">+</span></button><div class="faq-a">With battery storage installed, your home continues to run on stored solar energy during brownouts. The switch is seamless — critical appliances stay on as long as there is charge in the battery.</div></div>
+    <div class="faq-item"><button class="faq-q">How long does installation take? <span class="faq-arrow">+</span></button><div class="faq-a">Most residential installations are completed in 1–3 days, including panel mounting, inverter and battery setup, wiring, and system commissioning. We schedule at your convenience.</div></div>
+    <div class="faq-item"><button class="faq-q">What does the 10-year warranty cover? <span class="faq-arrow">+</span></button><div class="faq-a">The 10-year replacement warranty covers defects in the solar panels, inverter, and battery system. If any component fails under normal use within 10 years, we replace it at no additional cost to you.</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner reveal">
+    <p class="section-eyebrow">Free ROI Analysis</p>
+    <h2 class="section-title" style="font-size:clamp(2.2rem,5vw,3.8rem);">Send Us Your<br><span class="accent">Meralco Bill</span></h2>
+    <p class="section-desc" style="margin:0 auto;text-align:center;">Reach us through any of the options below. We'll respond within 24 hours with your complete savings breakdown — free, no commitment.</p>
+
+    <div class="contact-options">
+      <div class="contact-card">
+        <h4>Scan to Chat</h4>
+        <img src="images/viber-qr.jpg" alt="Scan to chat on Viber" class="viber-qr"/>
+        <p>Scan this QR code with your phone camera to open our Viber business chat.</p>
+      </div>
+      <div class="contact-card">
+        <h4>Contact Us Directly</h4>
+        <a id="viberLink" href="#" class="btn-viber">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L5.5 13.803l-2.97-.924c-.645-.203-.657-.645.136-.953l11.57-4.461c.537-.194 1.006.131.858.756z"/></svg>
+          CONTACT US ON VIBER
+        </a>
+        <a id="fbLink" href="#" class="btn-fb" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          MESSAGE ON FACEBOOK
+        </a>
+        <a id="emailLink" href="#" class="btn-email">✉ SEND VIA EMAIL</a>
+      </div>
+    </div>
+
+    <p class="contact-note">📞 Or call/text us directly: <strong id="phoneDisplay"></strong><br>GSIS Solar Loan eligible · Up to ₱500,000 at 5% interest<br>Pricing varies by site assessment and is subject to change without prior notice.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo-text" style="font-size:1.3rem;">CORE &amp; <span style="color:var(--orange)">KINETIC</span></div>
+      <p class="footer-tagline">Power · Mobility<br>Solar energy solutions for Philippine homes and businesses.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Packages</h4>
+      <ul>
+        <li><a href="#packages">6kW Essential Home</a></li>
+        <li><a href="#packages">8kW Heavy-Duty</a></li>
+        <li><a href="#packages">10kW Enterprise</a></li>
+        <li><a href="#packages">12kW Industrial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#features">Why Us</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#gallery">Our Work</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a id="footerViber" href="#">Viber</a></li>
+        <li><a id="footerFb" href="#" target="_blank">Facebook</a></li>
+        <li><a id="footerEmail" href="#">Email Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Core &amp; Kinetic. All rights reserved.</p>
+    <p class="footer-note">Prices subject to change without prior notice. Final cost depends on site assessment.</p>
+  </div>
+</footer>
+
+<a id="floatViber" href="#" class="float-viber" title="Contact us on Viber">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L5.5 13.803l-2.97-.924c-.645-.203-.657-.645.136-.953l11.57-4.461c.537-.194 1.006.131.858.756z"/></svg>
+</a>
+
+<script>
+  document.getElementById("phoneDisplay").textContent = CONFIG.phone;
+  document.getElementById("viberLink").href = CONFIG.viber;
+  document.getElementById("fbLink").href = CONFIG.facebook;
+  document.getElementById("emailLink").href = "mailto:" + CONFIG.email + "?subject=Free%20ROI%20Analysis%20Request&body=Hi%20Core%20%26%20Kinetic!%20I%27d%20like%20a%20free%20ROI%20analysis.%20Attaching%20my%20Meralco%20bill.";
+  document.getElementById("floatViber").href = CONFIG.viber;
+  document.getElementById("footerViber").href = CONFIG.viber;
+  document.getElementById("footerFb").href = CONFIG.facebook;
+  document.getElementById("footerEmail").href = "mailto:" + CONFIG.email;
+
+  const billInput  = document.getElementById("billInput");
+  const billSlider = document.getElementById("billSlider");
+
+  function calcSavings() {
+    const bill    = parseFloat(billInput.value) || 0;
+    const offset  = 0.70;
+    const savings = bill * offset;
+    const newBill = bill - savings;
+    const annual  = savings * 12;
+    const rate    = CONFIG.meralcoRate;
+    const kwhMonth= bill / rate;
+    let pkg = "6kW Essential Home";
+    if (kwhMonth > 900) pkg = "12kW Industrial Power";
+    else if (kwhMonth > 700) pkg = "10kW Enterprise Power";
+    else if (kwhMonth > 400) pkg = "8kW Heavy-Duty";
+
+    document.getElementById("rBill").textContent    = "₱" + bill.toLocaleString();
+    document.getElementById("rSavings").textContent = "₱" + savings.toLocaleString(undefined,{maximumFractionDigits:0}) + " / mo";
+    document.getElementById("rNew").textContent     = "₱" + newBill.toLocaleString(undefined,{maximumFractionDigits:0});
+    document.getElementById("rAnnual").textContent  = "₱" + annual.toLocaleString(undefined,{maximumFractionDigits:0}) + " / yr";
+    document.getElementById("recPackage").textContent = pkg;
+  }
+
+  billInput.addEventListener("input",  () => { billSlider.value = billInput.value; calcSavings(); });
+  billSlider.addEventListener("input", () => { billInput.value = billSlider.value; calcSavings(); });
+  calcSavings();
+
+  document.getElementById("faqList").addEventListener("click", e => {
+    const btn = e.target.closest(".faq-q");
+    if (!btn) return;
+    const item = btn.closest(".faq-item");
+    const wasOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach(i => i.classList.remove("open"));
+    if (!wasOpen) item.classList.add("open");
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
